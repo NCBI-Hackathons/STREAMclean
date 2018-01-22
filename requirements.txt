@@ -1,6 +1,5 @@
 chardet==3.0.4
 idna==2.6
 ncbi-genome-download==0.2.5
-powerline-status==2.6
 requests==2.18.4
 urllib3==1.22
