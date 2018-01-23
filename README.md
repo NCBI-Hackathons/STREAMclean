@@ -50,7 +50,7 @@ samtools view -bS SRR2848544_magicblast_default.sam |samtools view -F 4 -|cut -f
 **unmapped reads**
 ```
 samtools view -bS SRR2848544_magicblast_default.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
-2
+3
 ```
 
 ### Cross comparison
