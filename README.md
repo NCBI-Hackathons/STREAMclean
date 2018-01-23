@@ -1,13 +1,11 @@
-# NanoporeMapper
-A simple command line tool to map nanopore reads with high accuracy
+# NanoporeMapper - A simple command line tool to map nanopore reads with high accuracy
 
-
-## example call to download human ref genome
+### Download the Human Refernence Genome from NCBI
 
 `ncbi-genome-download -F fasta -t 9606 -R reference vertebrate_mammalian`
 (c.f. https://github.com/kblin/ncbi-genome-download)
 
-## template script to chain some commands together  
+## Bash template  
 `./mapper_wrapper.sh -d test1`
 
 This will:
