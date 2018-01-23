@@ -23,6 +23,31 @@ We downloaded the read sets and reference genomes for E. coli ST131 (`SRR5629778
 
 #### E.coli
 
+`bwa`:
+
+**mapped reads**
+```
+samtools …
+```
+
+**unmapped reads**
+```
+samtools …
+```
+
+`magicblast`:
+
+**mapped reads**
+```
+samtools …
+```
+
+**unmapped reads**
+```
+samtools …
+```
+
+
 #### Homo sapiens
 
 `bwa`:
