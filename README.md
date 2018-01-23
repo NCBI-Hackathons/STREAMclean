@@ -23,32 +23,45 @@ We downloaded the read sets and reference genomes for E. coli ST131 (`SRR5629778
 
 #### E.coli
 
+**total reads**
+```
+grep "@SRR5629778" SRR5629778.ecoli.st131.fastq |wc
+10964
+```
+
 `bwa`:
 
 **mapped reads**
 ```
-samtools …
+samtools view -bS SRR5629778_bwa.sam |samtools view -F 4 -|cut -f 1|sort|uniq |wc -l
+7581
 ```
 
 **unmapped reads**
 ```
-samtools …
+samtools view -bS SRR5629778_bwa.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
+3383
 ```
 
 `magicblast`:
 
 **mapped reads**
 ```
-samtools …
+samtools view -bS SRR5629778_magicblast.sam |samtools view -F 4 -|cut -f 1|sort|uniq |wc -l
+9919
 ```
 
 **unmapped reads**
 ```
-samtools …
+samtools view -bS SRR5629778_magicblast.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
+1045
 ```
 
 
 #### Homo sapiens
+
+**total reads**
+2912
 
 `bwa`:
 
@@ -115,22 +128,26 @@ samtools view -bS SRR5629778.ecoli.st131_magicblast.sam |samtools view -f 4 -|cu
 
 **mapped reads**
 ```
-samtools view -bS …
+samtools view -bS SRR2848544_bwa_he.sam |samtools view -F 4 -|cut -f 1|sort|uniq |wc -l
+0
 ```
 
 **unmapped reads**
 ```
-samtools view -bS …
+samtools view -bS SRR2848544_bwa_he.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
+2912
 ```
 
 `magicblast`:
 
 **mapped reads**
 ```
-samtools view -bS …
+samtools view -bS SRR2848544_magicblast_he.sam |samtools view -F 4 -|cut -f 1|sort|uniq |wc -l
+292
 ```
 
 **unmapped reads**
 ```
-samtools view -bS …
+samtools view -bS SRR2848544_magicblast_he.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
+2899
 ```
