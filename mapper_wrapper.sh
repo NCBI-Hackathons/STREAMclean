@@ -101,14 +101,15 @@ if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
 
   # ncbi-genome-download will be a dependency
   # ncbi-genome-download does not actually support comma-separated list (even though it's supposed to)
-  if [ -n "$EXCLUDE_TAX" ]; then
-    ncbi-genome-download -F fasta "$EXCLUDE_TAX" 2>nanoporeMapperErrors.log
-  fi
-  if [ -n "$INCLUDE_TAX" ]; then
-    ncbi-genome-download -F fasta "$INCLUDE_TAX" 2>nanoporeMapperErrors.log
-  fi
-  # for testing
-#  ncbi-genome-download --format fasta --taxid 199310 bacteria
+  # Dev Comment: following commented block is the for-realz
+#  if [ -n "$EXCLUDE_TAX" ]; then
+#    ncbi-genome-download -F fasta "$EXCLUDE_TAX" 2>nanoporeMapperErrors.log
+#  fi
+#  if [ -n "$INCLUDE_TAX" ]; then
+#    ncbi-genome-download -F fasta "$INCLUDE_TAX" 2>nanoporeMapperErrors.log
+#  fi
+  # Dev Comment: this line is for testing
+  ncbi-genome-download --format fasta --taxid 199310 bacteria
   wait
 
   # Exit if the genome download did not succeed. ncbi-genome-download does not return failure codes nor expose accessors for the list of valid inputs.
