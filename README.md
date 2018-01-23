@@ -61,8 +61,10 @@ samtools view -bS SRR5629778_magicblast.sam |samtools view -f 4 -|cut -f 1|sort|
 #### Homo sapiens
 
 **total reads**
+```
+grep "@SRR2848544"  ~/bastian/reference_data/SRR2848544.fastq |wc
 2912
-
+```
 `bwa`:
 
 **mapped reads**
