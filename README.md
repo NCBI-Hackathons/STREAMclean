@@ -52,3 +52,60 @@ samtools view -bS SRR2848544_magicblast_default.sam |samtools view -F 4 -|cut -f
 samtools view -bS SRR2848544_magicblast_default.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
 2
 ```
+
+### Cross comparison
+
+#### E. coli reads against Homo sapiens
+`bwa`:
+
+**mapped reads**
+```
+samtools view -bS SRR5629778.ecoli.st131_bwa.sam |samtools view -F 4 -|cut -f 1|sort|uniq |wc -l
+0
+```
+
+**unmapped reads**
+```
+samtools view -bS SRR5629778.ecoli.st131_bwa.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
+10964
+```
+
+`magicblast`:
+
+**mapped reads**
+```
+samtools view -bS SRR5629778.ecoli.st131_magicblast.sam |samtools view -F 4 -|cut -f 1|sort|uniq |wc -l
+10955
+```
+
+**unmapped reads**
+```
+samtools view -bS SRR5629778.ecoli.st131_magicblast.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
+9
+```
+
+#### Homo sapiens reads against E. coli
+
+`bwa`:
+
+**mapped reads**
+```
+samtools view -bS …
+```
+
+**unmapped reads**
+```
+samtools view -bS …
+```
+
+`magicblast`:
+
+**mapped reads**
+```
+samtools view -bS …
+```
+
+**unmapped reads**
+```
+samtools view -bS …
+```
