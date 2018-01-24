@@ -147,7 +147,7 @@ fi
 
 # magic-blast alignments, the first python script needs to run at the same
 # time, otherwise we won't get the benefit of streaming
-for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
+for SRA_ACC in ${$SRA_ACCESSIONS//,/ }
 do
 	if [ -n "$INCLUDE_TAX" ]; then
 	  "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
@@ -159,7 +159,7 @@ do
 done
 
 # filter magic-blasted reads
-for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
+for SRA_ACC in ${$SRA_ACCESSIONS//,/ }
 do
 	cat "$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py --score "$MB_SCORE" > "$SRA_ACC"_magicblast.fasta
 done
