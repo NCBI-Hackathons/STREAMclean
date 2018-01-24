@@ -136,18 +136,30 @@ if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
 
   # build the magic-blast database
   "$MAGIC_BLAST_DIR"/bin/makeblastdb -in "$WORK_DIR"/"$BLAST_DB_NAME".fna -dbtype nucl -parse_seqids -out "$BLAST_DB_NAME"
-else 
+else
   echo Using existing reference database "$BLAST_DB_NAME"
 fi
 
-# magic-blast alignments
+# magic-blast alignments, the first python script needs to run at the same
+# time, otherwise we won't get the benefit of streaming
 for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
 do
-"$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 >"$SRA_ACC"_magicblast.sam
+	if [ -n "$INCLUDE_TAX" ]; then
+	  "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
+		python streamin_magicblast.py -m include -s "$SCORE_THRESHOLD" >
+		"$SRA_ACC"_magicblast.sam
+	else
+		"$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
+		python streamin_magicblast.py -m exclude -s "$SCORE_THRESHOLD" >
+		"$SRA_ACC"_magicblast.sam
+	fi
 done
 
 # filter magic-blasted reads
-
+for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
+do
+	cat "$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py > "$SRA_ACC"_magicblast.fasta
+done
 # use samtools to combine results
 
-# output 
+# output

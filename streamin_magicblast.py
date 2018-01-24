@@ -66,7 +66,7 @@ def __main__():
         formula as described by 'score = a * Length + b'. If you want to give a
         formula provide the a & b as '--score a,b'
         """)
-        parser.add_argument('-s', '--score', default="0.001353,25",
+        parser.add_argument('-s', '--score', default="30",
                             help=score_help)
         match_help = dedent("""Select whether the reads matching the threshold
         should be included or excluded. If included is chosen only matching
