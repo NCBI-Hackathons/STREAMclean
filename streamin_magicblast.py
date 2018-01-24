@@ -34,21 +34,25 @@ def read_stdin(score_cutoff, match_behaviour):
         la = line.strip().split("\t")
         if (len(la)) == 14:
             # yep, this is a read
-            # current read is the same as line before
-            if la[0] == read_name:
-                score_sum += int(la[12].split(":")[-1])
-                read_list.append(line)
-            # current read is different to before, plus is not the first read
-            # ever
-            elif (la[0] != read_name) and (read_name is not None):
-                if check_cutoff(la, score_cutoff, match_behaviour, score_sum):
-                    # print all the data in read_list
-                    for i in read_list:
-                        sys.stdout.write(i)
-                    sys.stdout.flush()
-                read_name = la[0]
-                read_list = []
-                score_sum = 0
+            if read_name:
+                # current read is the same as line before
+                if la[0] == read_name:
+                    score_sum += int(la[12].split(":")[-1])
+                    read_list.append(line)
+                else:
+                    print(read_list)
+                    print(line)
+                    if check_cutoff(read_list[-1].split("\t"),
+                                    score_cutoff,
+                                    match_behaviour,
+                                    score_sum):
+                        # print all the data in read_list
+                        for i in read_list:
+                            sys.stdout.write(i)
+                            sys.stdout.flush()
+                    read_name = la[0]
+                    read_list = []
+                    score_sum = 0
             # first read!
             else:
                 read_name = la[0]
