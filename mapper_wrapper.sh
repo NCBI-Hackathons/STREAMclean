@@ -17,15 +17,18 @@ function usage {
 	echo ""
 	echo "  A whitelist or a blacklist can be provided, but not both.  If neither is provided, the reference database should already exist."
 	echo "  Otherwise, the reference database will be created based on the whitelist/blacklist."
+	echo ""
 	documentTaxList
 
 }
 
 function documentTaxList {
-	echo "  Blacklist and whitelist should be of the following format:"
-	echo "  * Any one (or comma-separated list of multiple) of the following: "
+	echo "  Blacklist and whitelist can currently be any format that ncbi-genome-downloader supports:"
+	echo "  * Any of these groups does not need to be quoted: "
 	echo "  	all,archaea,bacteria,fungi,invertebrate,plant,protozoa,unknown,vertebrate_mammalian,vertebrate_other,viral"
-	# document further options for taxList specifications (e.g. genus, taxID) that get added.
+	echo "  * Any of these sub-group specifications must be quoted, e.g. \"--taxid 199304 bacteria\""
+	echo "		--genus or -g, --taxid or -t, --species-taxid or -T"
+	echo "  Note that the ncbi-genome-downloader currently does not accept a comma-separated list."
 }
 
 
@@ -101,15 +104,16 @@ if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
 
   # ncbi-genome-download will be a dependency
   # ncbi-genome-download does not actually support comma-separated list (even though it's supposed to)
+  # Omit quotes around $EXCLUDE_TAX and $INCLUDE_TAX in order to expand user-entered quoted argument to pass directly to genome downloader
   # Dev Comment: following commented block is the for-realz
-#  if [ -n "$EXCLUDE_TAX" ]; then
-#    ncbi-genome-download -F fasta "$EXCLUDE_TAX" 2>nanoporeMapperErrors.log
-#  fi
-#  if [ -n "$INCLUDE_TAX" ]; then
-#    ncbi-genome-download -F fasta "$INCLUDE_TAX" 2>nanoporeMapperErrors.log
-#  fi
+  if [ -n "$EXCLUDE_TAX" ]; then
+    ncbi-genome-download -F fasta $EXCLUDE_TAX 2>nanoporeMapperErrors.log
+  fi
+  if [ -n "$INCLUDE_TAX" ]; then
+    ncbi-genome-download -F fasta $INCLUDE_TAX 2>nanoporeMapperErrors.log
+  fi
   # Dev Comment: this line is for testing
-  ncbi-genome-download --format fasta --taxid 199310 bacteria
+#  ncbi-genome-download --format fasta --taxid 199310 bacteria
   wait
 
   # Exit if the genome download did not succeed. ncbi-genome-download does not return failure codes nor expose accessors for the list of valid inputs.

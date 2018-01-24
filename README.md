@@ -1,12 +1,12 @@
 # NanoporeMapper - A simple command line tool to map nanopore reads with high accuracy
 
-### Download the Human Refernence Genome from NCBI
+### Download the Human Reference Genome from NCBI
 
 `ncbi-genome-download -F fasta -t 9606 -R reference vertebrate_mammalian`
 (c.f. https://github.com/kblin/ncbi-genome-download)
 
 ## Bash template  
-`./mapper_wrapper.sh -d test1`
+`./mapper_wrapper.sh -d test1 -i "-t 199304 bacteria"`
 
 This will:
 1. Download specified reference genomes using the [ncbi-genome-download package](https://github.com/kblin/ncbi-genome-download).
