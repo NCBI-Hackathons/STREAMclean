@@ -131,10 +131,10 @@ REFSEQ_DIR="$WORK_DIR/refseq"
   # ncbi-genome-download does not actually support comma-separated list (even though it's supposed to)
   # Omit quotes around $EXCLUDE_TAX and $INCLUDE_TAX in order to expand user-entered quoted argument to pass directly to genome downloader
   if [ -n "$EXCLUDE_TAX" ]; then
-    ncbi-genome-download -F fasta -o "$WORK_DIR" $EXCLUDE_TAX 2>"$OUT_DIR/nanoporeMapperErrors.log"
+    ncbi-genome-download -F fasta -o "$WORK_DIR" $EXCLUDE_TAX 2>"$OUT_DIR/streamcleanErrors.log"
   fi
   if [ -n "$INCLUDE_TAX" ]; then
-    ncbi-genome-download -F fasta -o "$WORK_DIR" $INCLUDE_TAX 2>"$OUT_DIR/nanoporeMapperErrors.log"
+    ncbi-genome-download -F fasta -o "$WORK_DIR" $INCLUDE_TAX 2>"$OUT_DIR/streamcleanErrors.log"
   fi
 
   # Dev Comment: this line is for testing
@@ -143,7 +143,7 @@ REFSEQ_DIR="$WORK_DIR/refseq"
 
   # Exit if the genome download did not succeed. ncbi-genome-download does not return failure codes nor expose accessors for the list of valid inputs.
   if [ ! -d "$REFSEQ_DIR" ]; then
-    echo Failed to download reference genome data.  See "$OUT_DIR/nanoporeMapperErrors.log"
+    echo Failed to download reference genome data.  See "$OUT_DIR/streamcleanErrors.log"
     exit 1
   fi
 
@@ -160,7 +160,7 @@ fi
 
 # magic-blast alignments, the first python script needs to run at the same
 # time, otherwise we won't get the benefit of streaming
-for SRA_ACC in $(echo $SRA_ACCESSIONS | sed "s/,/ /g") 
+for SRA_ACC in $(echo $SRA_ACCESSIONS | sed "s/,/ /g")
 do
 	SAM_PATH="$WORK_DIR/"$SRA_ACC"_magicblast.sam"
 	if [ -n "$INCLUDE_TAX" ]; then
@@ -174,7 +174,7 @@ done
 
 
 # filter magic-blasted reads
-for SRA_ACC in $(echo $SRA_ACCESSIONS | sed "s/,/ /g") 
+for SRA_ACC in $(echo $SRA_ACCESSIONS | sed "s/,/ /g")
 do
 	cat "$WORK_DIR/$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py  > "$OUT_DIR/$SRA_ACC"_magicblast.fasta
 done
