@@ -1,16 +1,17 @@
 # NanoporeMapper - A simple command line tool to map nanopore reads with high accuracy
 
 ## Bash template  
-`./mapper_wrapper.sh -d test1 -i bacteria`
+`./mapper_wrapper.sh -d test1 -i bacteria -s SRR4420340`
 
 or more specifically
 
-`./mapper_wrapper.sh -d test1 -i "-t 199310 bacteria"`
+`./mapper_wrapper.sh -d test1 -i "-t 199310 bacteria" -s SRR4420340`
 
 
 This will:
 1. Download specified reference genomes using the [ncbi-genome-download package](https://github.com/kblin/ncbi-genome-download).
 2. Create a [magic-blast](https://ncbi.github.io/magicblast/) database of the collected reference genomes.
+3. Map the SRA accessions against the whitelist/blacklist reference database.
 
 
 ## Comparing bwa and magicblast
