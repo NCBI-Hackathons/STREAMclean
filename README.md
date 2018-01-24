@@ -23,7 +23,7 @@
 ![](workflow.png)
 
 ## How to install it:
-- clone this repository `git clone `https://github.com/NCBI-Hackathons/STREAMclean`
+- clone this repository `git clone https://github.com/NCBI-Hackathons/STREAMclean`
 - install the required python libraries `pip install -r requirements.txt`
 - download `magicblast` [from NCBI](https://ncbi.github.io/magicblast/doc/download.html)
 
