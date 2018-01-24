@@ -66,6 +66,14 @@ def read_stdin(score_cutoff, match_behaviour):
             sys.stdout.write(line)
             sys.stdout.flush()
 
+    if check_cutoff(read_list[-1].split("\t"),
+                    score_cutoff,
+                    match_behaviour,
+                    score_sum):
+        for i in read_list:
+            sys.stdout.write(i)
+            sys.stdout.flush()
+
 
 def __main__():
     try:
