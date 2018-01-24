@@ -6,14 +6,15 @@ programname=$0
 version="0.1"
 
 function usage {
-	echo "usage:  $programname -d existingDBName [-e|-i taxList] [-m  magicBlastDir] [-o outDir] [-w workDir]"
+	echo "usage:  $programname -s sraAccessions -d existingDBName [-e|-i taxList] [-m  magicBlastDir] [-o outDir] [-w workDir]"
 	echo ""
+	echo "  -s sraAccessions	Comma-separated list of SRA accessions to map against reference genomes.  Do not include spaces."
 	echo "  -d existingDBName	Reference database name - always required."
 	echo "  -e taxList		Blacklist of taxonomy indicators - magicBlast will keep only sequence reads that could not be mapped to these genomes."
 	echo "  -i taxList		Whitelist of taxonomy indicators - magicBlast will keep only sequence reads that could be mapped to these genomes."
-	echo "  -m magicBlastDir	Specify the directory that contains the bin/magicblast - default is "$WORK_DIR
-	echo "  -o outDir		Specify the directory for output. [What goes here?]"
-	echo "  -w workDir		Specify the working directory to create the genome database in - default is the current directory."
+	echo "  -m magicBlastDir	Specify the (existing) directory that contains the bin/magicblast - default is "$MAGIC_BLAST_DIR
+	echo "  -o outDir		Specify the (existing) directory for output files - default is the current directory."
+	echo "  -w workDir		Specify the (existing) directory to store reference genome data in - default is the current directory."
 	echo ""
 	echo "  A whitelist or a blacklist can be provided, but not both.  If neither is provided, the reference database should already exist."
 	echo "  Otherwise, the reference database will be created based on the whitelist/blacklist."
@@ -70,7 +71,7 @@ while getopts ":d:e:i:m:o:s:w:" o; do
 	   usage
 	   exit 0
 	   ;;
-        \?)			# When SRA IDs come in, this will break?
+        \?)
             usage
 	    exit 0
             ;;
@@ -95,8 +96,8 @@ if [ -n "$EXCLUDE_TAX" ] && [ -n "$INCLUDE_TAX" ]; then
 fi
 
 # Assumption: Uses na1 file existence as a proxy for the reference db having been created.
-if [ -z "$EXCLUDE_TAX" ] && [ -z "$INCLUDE_TAX" ] && [ !  -f "$WORK_DIR"/"$BLAST_DB_NAME".na1 ]; then
-  echo "When neither a whitelist nor a blacklist exists, the reference database must already exist.  This file does not exist: $WORK_DIR/$BLAST_DB_NAME.na1"
+if [ -z "$EXCLUDE_TAX" ] && [ -z "$INCLUDE_TAX" ] && [ !  -f "$BLAST_DB_NAME".na1 ]; then
+  echo "When neither a whitelist nor a blacklist exists, the reference database must already exist.  This file does not exist: $BLAST_DB_NAME.na1"
   exit 0
 fi
 # End of Validation
