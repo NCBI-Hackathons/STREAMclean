@@ -28,7 +28,9 @@ function documentTaxList {
 	echo "  	all,archaea,bacteria,fungi,invertebrate,plant,protozoa,unknown,vertebrate_mammalian,vertebrate_other,viral"
 	echo "  * Any of these sub-group specifications must be quoted, e.g. \"--taxid 199304 bacteria\""
 	echo "		--genus or -g, --taxid or -t, --species-taxid or -T"
-	echo "  Note that the ncbi-genome-downloader currently does not accept a comma-separated list."
+	echo "  Caveats:"
+	echo "    The ncbi-genome-downloader currently does not accept a comma-separated list, despite the documentation."
+	echo "    Multi-word specifications (e.g. Streptomyces coelicolor) are not supported here."  # This is because we completely unquote the taxList
 }
 
 
@@ -96,22 +98,23 @@ if [ -z "$EXCLUDE_TAX" ] && [ -z "$INCLUDE_TAX" ] && [ !  -f "$WORK_DIR"/"$BLAST
 fi
 # End of Validation
 
-
 # Download reference genomes and make database if necessary
 if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
+  # TODO: this is where we should plug in the download size/time estimator
+
   echo Combined fasta and db files will be in this working directory: "$WORK_DIR"
   echo Creating reference database "$BLAST_DB_NAME"
 
   # ncbi-genome-download will be a dependency
   # ncbi-genome-download does not actually support comma-separated list (even though it's supposed to)
   # Omit quotes around $EXCLUDE_TAX and $INCLUDE_TAX in order to expand user-entered quoted argument to pass directly to genome downloader
-  # Dev Comment: following commented block is the for-realz
   if [ -n "$EXCLUDE_TAX" ]; then
     ncbi-genome-download -F fasta $EXCLUDE_TAX 2>nanoporeMapperErrors.log
   fi
   if [ -n "$INCLUDE_TAX" ]; then
     ncbi-genome-download -F fasta $INCLUDE_TAX 2>nanoporeMapperErrors.log
   fi
+
   # Dev Comment: this line is for testing
 #  ncbi-genome-download --format fasta --taxid 199310 bacteria
   wait
