@@ -6,7 +6,10 @@
 (c.f. https://github.com/kblin/ncbi-genome-download)
 
 ## Bash template  
+`./mapper_wrapper.sh -d test1 -i bacteria`
+or more specifically
 `./mapper_wrapper.sh -d test1 -i "-t 199304 bacteria"`
+
 
 This will:
 1. Download specified reference genomes using the [ncbi-genome-download package](https://github.com/kblin/ncbi-genome-download).
