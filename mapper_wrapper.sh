@@ -9,8 +9,8 @@ function usage {
 	echo "usage:  $programname -d existingDBName [-e|-i taxList] [-m  magicBlastDir] [-o outDir] [-w workDir]"
 	echo ""
 	echo "  -d existingDBName	Reference database name - always required."
-	echo "  -e taxList		Blacklist of taxonomy indicators - magicBlast will produce only [pieces] that are not included in these genomes."
-	echo "  -i taxList		Whitelist of taxonomy indicators - magicBlast will produce only [pieces] that are included in these genomes."
+	echo "  -e taxList		Blacklist of taxonomy indicators - magicBlast will keep only sequence reads that could not be mapped to these genomes."
+	echo "  -i taxList		Whitelist of taxonomy indicators - magicBlast will keep only sequence reads that could be mapped to these genomes."
 	echo "  -m magicBlastDir	Specify the directory that contains the bin/magicblast - default is "$WORK_DIR
 	echo "  -o outDir		Specify the directory for output. [What goes here?]"
 	echo "  -w workDir		Specify the working directory to create the genome database in - default is the current directory."
