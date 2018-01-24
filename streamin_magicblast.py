@@ -22,14 +22,23 @@ def read_stdin():
             # yep, this is a read
             if check_cutoff(la):
                 sys.stdout.write(line)
+                sys.stdout.flush()
         else:
             # todo: this should contain the output for the header
             # lines
             sys.stdout.write(line)
+            sys.stdout.flush()
 
 
 def __main__():
-    read_stdin()
+    try:
+        read_stdin()
+
+    except BrokenPipeError:
+        # pipe error (e.g., when head is used)
+        sys.stderr.close()
+        sys.stdout.close()
+        exit(0)
 
 
 if __name__ == "__main__":
