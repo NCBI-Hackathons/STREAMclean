@@ -1,6 +1,6 @@
 # NanoporeMapper - A simple command line tool to map nanopore reads with high accuracy
 
-## Bash template  
+## Bash wrapper script  
 `./mapper_wrapper.sh -d test1 -i bacteria -s SRR4420340`
 
 or more specifically
