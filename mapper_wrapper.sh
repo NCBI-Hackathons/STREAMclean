@@ -29,7 +29,7 @@ function documentTaxList {
 	echo "  Blacklist and whitelist can currently be any format that ncbi-genome-downloader supports:"
 	echo "  * Any of these groups does not need to be quoted: "
 	echo "  	all,archaea,bacteria,fungi,invertebrate,plant,protozoa,unknown,vertebrate_mammalian,vertebrate_other,viral"
-	echo "  * Any of these sub-group specifications must be quoted, e.g. \"--taxid 199304 bacteria\""
+	echo "  * Any of these sub-group specifications must be quoted, e.g. \"--taxid 199310 bacteria\""
 	echo "		--genus or -g, --taxid or -t, --species-taxid or -T"
 	echo "  Caveats:"
 	echo "    The ncbi-genome-downloader currently does not accept a comma-separated list, despite the documentation."
