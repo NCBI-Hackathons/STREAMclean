@@ -3,9 +3,8 @@ import argparse
 from textwrap import dedent
 
 
-def check_cutoff(seq_read, score_cutoff, match_behaviour):
+def check_cutoff(seq_read, score_cutoff, match_behaviour, found_score):
     length = len(seq_read[9])
-    found_score = int(seq_read[12].split(":")[-1])
     score_cutoff_list = score_cutoff.split(",")
     score_cutoff_list = [float(i) for i in score_cutoff_list]
     if len(score_cutoff_list) == 2:
@@ -28,24 +27,51 @@ def read_stdin(score_cutoff, match_behaviour):
     a) line is a read or not
     b) if a read check cutoff value
     """
+    read_name = None
+    score_sum = 0
+    read_list = []
     for line in sys.stdin:
         la = line.strip().split("\t")
         if (len(la)) == 14:
             # yep, this is a read
-            if check_cutoff(la, score_cutoff, match_behaviour):
-                sys.stdout.write(line)
-                sys.stdout.flush()
+            if read_name:
+                # current read is the same as line before
+                if la[0] == read_name:
+                    score_sum += int(la[12].split(":")[-1])
+                    read_list.append(line)
+                else:
+                    if check_cutoff(read_list[-1].split("\t"),
+                                    score_cutoff,
+                                    match_behaviour,
+                                    score_sum):
+                        # print all the data in read_list
+                        for i in read_list:
+                            sys.stdout.write(i)
+                            sys.stdout.flush()
+                    read_name = la[0]
+                    read_list = [line]
+                    score_sum = int(la[12].split(":")[-1])
+            # first read!
+            else:
+                read_name = la[0]
+                score_sum += int(la[12].split(":")[-1])
+                read_list.append(line)
+        # unmapped read
         elif la[2] == "*":
             if match_behaviour == "exclude":
                 sys.stdout.write(line)
                 sys.stdout.flush()
-            else:
-                pass
 
         else:
-            # todo: this should contain the output for the header
-            # lines
             sys.stdout.write(line)
+            sys.stdout.flush()
+
+    if check_cutoff(read_list[-1].split("\t"),
+                    score_cutoff,
+                    match_behaviour,
+                    score_sum):
+        for i in read_list:
+            sys.stdout.write(i)
             sys.stdout.flush()
 
 
