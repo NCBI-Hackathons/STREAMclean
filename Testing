@@ -1,1 +1,5 @@
-We tested four different tools with . They can be found in server/tools/ .
+
+| Comparison | Tool | Task | Result |
+| ---------- | ---- | ---- | ------ |
+| E.coli Self Comparison | bash | Total Reads | 10964 |
+

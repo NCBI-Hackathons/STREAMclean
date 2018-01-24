@@ -29,7 +29,7 @@ function documentTaxList {
 	echo "  Blacklist and whitelist can currently be any format that ncbi-genome-downloader supports:"
 	echo "  * Any of these groups does not need to be quoted: "
 	echo "  	all,archaea,bacteria,fungi,invertebrate,plant,protozoa,unknown,vertebrate_mammalian,vertebrate_other,viral"
-	echo "  * Any of these sub-group specifications must be quoted, e.g. \"--taxid 199304 bacteria\""
+	echo "  * Any of these sub-group specifications must be quoted, e.g. \"--taxid 199310 bacteria\""
 	echo "		--genus or -g, --taxid or -t, --species-taxid or -T"
 	echo "  Caveats:"
 	echo "    The ncbi-genome-downloader currently does not accept a comma-separated list, despite the documentation."
@@ -147,7 +147,7 @@ fi
 
 # magic-blast alignments, the first python script needs to run at the same
 # time, otherwise we won't get the benefit of streaming
-for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
+for SRA_ACC in ${$SRA_ACCESSIONS//,/ }
 do
 	if [ -n "$INCLUDE_TAX" ]; then
 	  "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
@@ -159,7 +159,7 @@ do
 done
 
 # filter magic-blasted reads
-for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
+for SRA_ACC in ${$SRA_ACCESSIONS//,/ }
 do
 	cat "$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py --score "$MB_SCORE" > "$SRA_ACC"_magicblast.fasta
 done
