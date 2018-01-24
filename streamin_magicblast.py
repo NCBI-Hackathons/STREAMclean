@@ -36,13 +36,11 @@ def read_stdin(score_cutoff, match_behaviour):
                 sys.stdout.write(line)
                 sys.stdout.flush()
         elif la[2] == "*":
-            print(la)
             if match_behaviour == "exclude":
                 sys.stdout.write(line)
                 sys.stdout.flush()
             else:
                 pass
-            sys.exit()
 
         else:
             # todo: this should contain the output for the header
