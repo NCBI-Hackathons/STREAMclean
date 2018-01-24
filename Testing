@@ -17,4 +17,4 @@ E. coli reads against Homo sapiens	   magicblast	  Unmapped Reads	  9
 H. sapiens reads against E. coli	     bwa	        Mapped Reads	    0
 H. sapiens reads against E. coli	     bwa	        Unmapped Reads	  2912
 H. sapiens reads against E. coli	     magicblast	  Mapped Reads	    292
-H. sapiens reads against E. coli	     magicblast	  Unmapped Reads	2 899
+H. sapiens reads against E. coli	     magicblast	  Unmapped Reads	  2899
