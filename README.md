@@ -22,6 +22,11 @@
 
 ![](workflow.png)
 
+## How to install it:
+- clone this repository `git clone `https://github.com/NCBI-Hackathons/NanoporeMapper`
+- install the required python libraries `pip install -r requirements.txt`
+- [download `magicblast` from NCBI](https://ncbi.github.io/magicblast/doc/download.html)
+
 ## How to use it: Bash wrapper script  
 `./mapper_wrapper.sh -d test1 -i bacteria -s SRR4420340`
 
