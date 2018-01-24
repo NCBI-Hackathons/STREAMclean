@@ -37,7 +37,7 @@ function documentTaxList {
 }
 
 
-echo "Nanopore Mapper, version "$version
+echo "STREAMclean, version "$version
 
 # Basic flag option validation
 if [ $# -eq 0 ]; then     # Cannot be called meaningfully without flags
@@ -118,10 +118,10 @@ if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
   # ncbi-genome-download does not actually support comma-separated list (even though it's supposed to)
   # Omit quotes around $EXCLUDE_TAX and $INCLUDE_TAX in order to expand user-entered quoted argument to pass directly to genome downloader
   if [ -n "$EXCLUDE_TAX" ]; then
-    ncbi-genome-download -F fasta $EXCLUDE_TAX 2>nanoporeMapperErrors.log
+    ncbi-genome-download -F fasta $EXCLUDE_TAX 2>streamCleanErrors.log
   fi
   if [ -n "$INCLUDE_TAX" ]; then
-    ncbi-genome-download -F fasta $INCLUDE_TAX 2>nanoporeMapperErrors.log
+    ncbi-genome-download -F fasta $INCLUDE_TAX 2>streamCleanErrors.log
   fi
 
   # Dev Comment: this line is for testing
@@ -130,7 +130,7 @@ if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
 
   # Exit if the genome download did not succeed. ncbi-genome-download does not return failure codes nor expose accessors for the list of valid inputs.
   if [ ! -d refseq ]; then
-    echo Failed to download reference genome data.  See nanoporeMapperErrors.log
+    echo Failed to download reference genome data.  See streamCleanErrors.log
     exit 1
   fi
 
