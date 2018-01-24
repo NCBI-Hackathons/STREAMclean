@@ -32,7 +32,7 @@
 
 or more specifically
 
-`./mapper_wrapper.sh -d test1 -i "-t 199310 bacteria" -s SRR4420340`
+`./mapper_wrapper.sh -d test1 -i "-t 199310 viral" -s SRR4420340`
 
 
 This will:
