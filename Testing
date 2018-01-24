@@ -1,5 +1,20 @@
 
-| Comparison | Tool | Task | Result |
-| ---------- | ---- | ---- | ------ |
-| E.coli Self Comparison | bash | Total Reads | 10964 |
-
+Comparison	                           Tool	        Task	            Result
+E. coli self-comparison	               bash	        Total Reads	      10964
+E. coli self-comparison	               bwa	        Mapped Reads	    7581
+E. coli self-comparison	               bwa	        Unmapped Reads	  3383
+E. coli self-comparison	               magicblast	  Mapped Reads	    9919
+E. coli self-comparison	               magicblast	  Unmapped Reads	  1045
+H. sapiens self-comparison	           bash	        Total Reads	      2912
+H. sapiens self-comparison	           bwa	        Mapped Reads	    2910
+H. sapiens self-comparison	           bwa	        Unmapped Reads	  2
+H. sapiens self-comparison	           magicblast	  Mapped Reads	    2912
+H. sapiens self-comparison	           magicblast	  Unmapped Reads	  3
+E. coli reads against Homo sapiens	   bwa	        Mapped Reads	    0
+E. coli reads against Homo sapiens	   bwa	        Unmapped Reads	  10964
+E. coli reads against Homo sapiens	   magicblast	  Mapped Reads	    10955
+E. coli reads against Homo sapiens	   magicblast	  Unmapped Reads	  9
+H. sapiens reads against E. coli	     bwa	        Mapped Reads	    0
+H. sapiens reads against E. coli	     bwa	        Unmapped Reads	  2912
+H. sapiens reads against E. coli	     magicblast	  Mapped Reads	    292
+H. sapiens reads against E. coli	     magicblast	  Unmapped Reads	2 899
