@@ -87,13 +87,11 @@ shift $((OPTIND-1))
 
 # More sophisticated validation
 if [ ! -d "$WORK_DIR" ]; then
-  echo "$WORK_DIR" does not exist - exiting.
-  exit 0
+  mkdir "$WORK_DIR"
 fi
 
 if [ ! -d "$OUT_DIR" ]; then
-  echo "$OUT_DIR" does not exist - exiting.
-  exit 0
+  mkdir "$OUT_DIR"
 fi
 
 if [ ! -d "$MAGIC_BLAST_DIR" ]; then
