@@ -1,4 +1,6 @@
-# NanoporeMapper - A simple command line tool to map nanopore reads with high accuracy
+![](logo.png)
+
+# STREAMclean - Download and filter reads from the SRA in a streaming way
 
 ## Bash template  
 `./mapper_wrapper.sh -d test1 -i bacteria`
