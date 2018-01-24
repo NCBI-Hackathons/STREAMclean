@@ -16,11 +16,13 @@ def read_stdin():
     a) line is a read or not
     b) if a read: convert to fastq
     """
+    last_written_read = ""
     for line in sys.stdin:
         la = line.strip().split("\t")
-        if (len(la)) == 14:
+        if (len(la)) == 14 and last_written_read != la[0]:
             # yep, this is a read
             write_fasta_stdout(la)
+            last_written_read = la[0]
         else:
             pass
 
