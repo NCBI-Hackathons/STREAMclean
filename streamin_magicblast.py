@@ -31,5 +31,6 @@ def read_stdin():
 def __main__():
     read_stdin()
 
+
 if __name__ == "__main__":
     __main__()
