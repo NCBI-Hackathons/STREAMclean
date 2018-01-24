@@ -44,9 +44,8 @@ def read_stdin(score_cutoff, match_behaviour):
                 if check_cutoff(la, score_cutoff, match_behaviour, score_sum):
                     # print all the data in read_list
                     for i in read_list:
-                        print(i)
-                        #sys.stdout.write(i)
-                    #sys.stdout.flush()
+                        sys.stdout.write(i)
+                    sys.stdout.flush()
                 read_name = la[0]
                 read_list = []
                 score_sum = 0
@@ -58,14 +57,12 @@ def read_stdin(score_cutoff, match_behaviour):
         # unmapped read
         elif la[2] == "*":
             if match_behaviour == "exclude":
-                pass
-                #sys.stdout.write(line)
-                #sys.stdout.flush()
+                sys.stdout.write(line)
+                sys.stdout.flush()
 
         else:
-            pass
-            #sys.stdout.write(line)
-            #sys.stdout.flush()
+            sys.stdout.write(line)
+            sys.stdout.flush()
 
 
 def __main__():
