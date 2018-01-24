@@ -1,1 +1,9 @@
+#Draft
 
+#STREAMclean is a command line aligner suitable for both long read data, such as nanopore sequences, and data compose of shorter reads, such as those generated on the majority of NGS systems.
+
+#STREAMclean utilizes ncbi-genome-download to increase efficency and customization of database formation, making it unnecesary for the user to separatley download and create databases. Databases can also be custom made, being comprised of different organisms, levels of taxa, etc..
+
+#STREAMclean aligns straight from SRA files, without intermediate file conversion necessary. Generated output is in .sam format, with .fasta and .fastq options avaibile through integrated samtools functionality. For alignment, one need only supply the SRA accession number (or file containing a list of such) and the file for the reference as a magicblast database.
+
+#Post-magicBLAST filtering is applied to the output, with users able to choose more or less stringent alignment parameters (in accepted read length) if so desired. 
