@@ -40,7 +40,7 @@ def read_stdin(score_cutoff, match_behaviour):
                 read_list.append(line)
             # current read is different to before, plus is not the first read
             # ever
-            elif la[0] != read_name and read_name is not None:
+            elif (la[0] != read_name) and (read_name is not None):
                 if check_cutoff(la, score_cutoff, match_behaviour, score_sum):
                     # print all the data in read_list
                     for i in read_list:
