@@ -42,7 +42,7 @@ if [ $# -eq 0 ]; then     # Cannot be called meaningfully without flags
 	exit 0
 fi
 
-while getopts ":d:e:i:m:o:w:" o; do
+while getopts ":d:e:i:m:o:s:w:" o; do
     case "${o}" in
         d)
 	    BLAST_DB_NAME=${OPTARG}
@@ -58,6 +58,9 @@ while getopts ":d:e:i:m:o:w:" o; do
 	    ;;
 	o)
 	    OUTDIR=${OPTARG}
+	    ;;
+	s)
+	    SRA_ACCESSIONS=${OPTARG}
 	    ;;
 	w)
 	    WORK_DIR=${OPTARG}
@@ -135,7 +138,12 @@ if [ -n "$EXCLUDE_TAX" ] || [ -n "$INCLUDE_TAX" ]; then
 else 
   echo Using existing reference database "$BLAST_DB_NAME"
 fi
+
 # magic-blast alignments
+for "$SRA_ACC" in ${$SRA_ACCS//,/ }
+do
+"$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 >"$SRA_ACC"_magicblast.sam
+done
 
 # filter magic-blasted reads
 
