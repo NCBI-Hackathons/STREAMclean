@@ -40,8 +40,6 @@ def read_stdin(score_cutoff, match_behaviour):
                     score_sum += int(la[12].split(":")[-1])
                     read_list.append(line)
                 else:
-                    print(read_list)
-                    print(line)
                     if check_cutoff(read_list[-1].split("\t"),
                                     score_cutoff,
                                     match_behaviour,
@@ -51,8 +49,8 @@ def read_stdin(score_cutoff, match_behaviour):
                             sys.stdout.write(i)
                             sys.stdout.flush()
                     read_name = la[0]
-                    read_list = []
-                    score_sum = 0
+                    read_list = [line]
+                    score_sum = int(la[12].split(":")[-1])
             # first read!
             else:
                 read_name = la[0]
