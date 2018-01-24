@@ -151,3 +151,13 @@ samtools view -bS SRR2848544_magicblast_he.sam |samtools view -F 4 -|cut -f 1|so
 samtools view -bS SRR2848544_magicblast_he.sam |samtools view -f 4 -|cut -f 1|sort|uniq |wc -l
 2899
 ```
+
+## How-to run `bwa`
+
+Create index of the reference genome:
+
+`bwa index reference_genome.fasta reference_genome.fasta`
+
+Align reads
+
+`bwa mem reference_genome.fasta read_set.fastq`
