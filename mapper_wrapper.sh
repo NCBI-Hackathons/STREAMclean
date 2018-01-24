@@ -89,9 +89,9 @@ if [ -n "$EXCLUDE_TAX" ] && [ -n "$INCLUDE_TAX" ]; then
   exit 0
 fi
 
-# Assumption: Uses nsd file existence as a proxy for the reference db having been created.
-if [ -z "$EXCLUDE_TAX" ] && [ -z "$INCLUDE_TAX" ] && [ !  -f "$WORK_DIR"/"$BLAST_DB_NAME".nsd ]; then
-  echo "When neither a whitelist nor a blacklist exists, the reference database must already exist.  This file does not exist: $WORK_DIR/$BLAST_DB_NAME.nsd"
+# Assumption: Uses na1 file existence as a proxy for the reference db having been created.
+if [ -z "$EXCLUDE_TAX" ] && [ -z "$INCLUDE_TAX" ] && [ !  -f "$WORK_DIR"/"$BLAST_DB_NAME".na1 ]; then
+  echo "When neither a whitelist nor a blacklist exists, the reference database must already exist.  This file does not exist: $WORK_DIR/$BLAST_DB_NAME.na1"
   exit 0
 fi
 # End of Validation
