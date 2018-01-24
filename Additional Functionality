@@ -1,0 +1,17 @@
+DockerFile
+
+comes with a Dockerfile which can be used to build the Docker image.
+
+    git clone https://github.com/NCBI-Hackathons/<this software>.git
+    cd server
+    docker build --rm -t <this software>/<this software> .
+    docker run -t -i <this software>/<this software>
+
+Website
+
+There is also a Docker image for hosting the main website. This should only be used for debug purposes.
+
+    git clone https://github.com/NCBI-Hackathons/<this software>.git
+    cd Website
+    docker build --rm -t <this software>/website .
+    docker run -t -i <this software>/website
