@@ -1,1 +1,21 @@
+Installation options:
 
+We provide two options for installing : Docker or directly from Github.
+Docker
+
+The Docker image contains as well as a webserver and FTP server in case you want to deploy the FTP server. It does also contain a web server for testing the main website (but should only be used for debug purposes).
+
+    docker pull ncbihackathons/<this software> command to pull the image from the DockerHub
+    docker run ncbihackathons/<this software> Run the docker image from the master shell script
+    Edit the configuration files as below
+
+Installing from Github
+
+    git clone https://github.com/NCBI-Hackathons/<this software>.git
+    Edit the configuration files as below
+    sh server/<this software>.sh to test
+    Add cron job as required (to execute .sh script)
+
+Configuration
+
+Examples here:
