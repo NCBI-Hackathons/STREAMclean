@@ -146,12 +146,10 @@ for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
 do
 	if [ -n "$INCLUDE_TAX" ]; then
 	  "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
-		python streamin_magicblast.py -m include -s "$SCORE_THRESHOLD" >
-		"$SRA_ACC"_magicblast.sam
+		python streamin_magicblast.py -m include -s "$SCORE_THRESHOLD" > "$SRA_ACC"_magicblast.sam
 	else
 		"$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
-		python streamin_magicblast.py -m exclude -s "$SCORE_THRESHOLD" >
-		"$SRA_ACC"_magicblast.sam
+		python streamin_magicblast.py -m exclude -s "$SCORE_THRESHOLD" > "$SRA_ACC"_magicblast.sam
 	fi
 done
 
