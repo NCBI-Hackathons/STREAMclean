@@ -145,18 +145,21 @@ fi
 for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
 do
 	if [ -n "$INCLUDE_TAX" ]; then
-	  "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \ >
-		python streamin_magicblast.py -m include -s "$SCORE_THRESHOLD"
-		> "$SRA_ACC"_magicblast.sam
+	  "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
+		python streamin_magicblast.py -m include -s "$SCORE_THRESHOLD" >
+		"$SRA_ACC"_magicblast.sam
 	else
-		"$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \ >
-		python streamin_magicblast.py -m exclude -s "$SCORE_THRESHOLD"
-		> "$SRA_ACC"_magicblast.sam
+		"$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 | \
+		python streamin_magicblast.py -m exclude -s "$SCORE_THRESHOLD" >
+		"$SRA_ACC"_magicblast.sam
 	fi
 done
 
 # filter magic-blasted reads
-
+for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
+do
+	cat "$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py > "$SRA_ACC"_magicblast.fasta
+done
 # use samtools to combine results
 
 # output
