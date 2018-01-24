@@ -4,6 +4,7 @@ MAGIC_BLAST_DIR=/home/ubuntu/bastian/ncbi-magicblast-1.3.0
 WORK_DIR="$(pwd)"
 programname=$0
 version="0.1"
+MB_SCORE=30
 
 function usage {
 	echo "usage:  $programname -s sraAccessions -d existingDBName [-e|-i taxList] [-m  magicBlastDir] [-o outDir] [-w workDir]"
@@ -14,6 +15,7 @@ function usage {
 	echo "  -i taxList		Whitelist of taxonomy indicators - magicBlast will keep only sequence reads that could be mapped to these genomes."
 	echo "  -m magicBlastDir	Specify the (existing) directory that contains the bin/magicblast - default is "$MAGIC_BLAST_DIR
 	echo "  -o outDir		Specify the (existing) directory for output files - default is the current directory."
+	echo "  -t magicblastScoreThreshold Specify either a single integer value or the parameters of the linear model a,b -default is "$MB_SCORE" "
 	echo "  -w workDir		Specify the (existing) directory to store reference genome data in - default is the current directory."
 	echo ""
 	echo "  A whitelist or a blacklist can be provided, but not both.  If neither is provided, the reference database should already exist."
@@ -43,7 +45,7 @@ if [ $# -eq 0 ]; then     # Cannot be called meaningfully without flags
 	exit 0
 fi
 
-while getopts ":d:e:i:m:o:s:w:" o; do
+while getopts ":d:e:i:m:o:s:t:w:" o; do
     case "${o}" in
         d)
 	    BLAST_DB_NAME=${OPTARG}
@@ -62,6 +64,9 @@ while getopts ":d:e:i:m:o:s:w:" o; do
 	    ;;
 	s)
 	    SRA_ACCESSIONS=${OPTARG}
+	    ;;
+	t)
+	    MB_SCORE=${OPTARG}
 	    ;;
 	w)
 	    WORK_DIR=${OPTARG}
@@ -158,7 +163,7 @@ done
 # filter magic-blasted reads
 for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
 do
-	cat "$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py > "$SRA_ACC"_magicblast.fasta
+	cat "$SRA_ACC"_magicblast.sam | python streamin_sam_to_reads.py --score "$MB_SCORE" > "$SRA_ACC"_magicblast.fasta
 done
 # use samtools to combine results
 
