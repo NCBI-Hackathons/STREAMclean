@@ -140,7 +140,7 @@ else
 fi
 
 # magic-blast alignments
-for "$SRA_ACC" in ${$SRA_ACCS//,/ }
+for "$SRA_ACC" in ${$SRA_ACCESSIONS//,/ }
 do
 "$MAGIC_BLAST_DIR"/bin/magicblast -sra "$SRA_ACC" -db "$BLAST_DB_NAME" -gapextend 0 >"$SRA_ACC"_magicblast.sam
 done
