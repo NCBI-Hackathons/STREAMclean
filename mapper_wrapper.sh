@@ -104,6 +104,11 @@ if [ -z "$BLAST_DB_NAME" ]; then
   exit 0
 fi
 
+if [ -z "$SRA_ACCESSIONS" ]; then
+  echo "Please supply at least one SRA accession to be screened."
+  exit 0
+fi
+
 if [ -n "$EXCLUDE_TAX" ] && [ -n "$INCLUDE_TAX" ]; then
   echo "Both a whitelist and blacklist were provided.  This is not currently supported."
   exit 0
