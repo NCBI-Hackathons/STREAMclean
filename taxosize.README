@@ -1,6 +1,6 @@
 TaxoSize - evaluating size of taxonomy before downloading it.
 
-This helper tool can be used in association with the nanoporeMapper wrapper (mapper_wrapper.sh) to evaluate the size of the taxonomy before downloading it.
+This helper tool can be used in association with the STREAMclean to evaluate the size of the taxonomy before downloading it.
 
 This tool relies on esearch which needs to be available on machine at (/opt/edirect/).
 
@@ -22,4 +22,4 @@ Usage:
 
 Limitations:
 
-	taxosize is dependant on esearch which is unable to handle queries with resultsets with more than 50,000 items. This is the case for bacteria taxonomy which should not be used with this tool as the search criteria too wide and not a use case that is curently handled.
+	taxosize is dependant on esearch which is unable to handle queries with result sets with more than 50,000 items. This is the case for bacteria taxonomy which should not be used with this tool as the search criteria too wide and not a use case that is curently handled.
