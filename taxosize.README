@@ -1,0 +1,25 @@
+TaxoSize - evaluating size of taxonomy before downloading it.
+
+This helper tool can be used in association with the nanoporeMapper wrapper (mapper_wrapper.sh) to evaluate the size of the taxonomy before downloading it.
+
+This tool relies on esearch which needs to be available on machine at (/opt/edirect/).
+
+This tool has a depedency on hurry.filesize which can be install using:
+	python -m pip install hurry.filesize
+
+Usage:
+
+	python taxosize taxonomy
+
+	where taxonomy if the taxonomy to size. i.e. human, virus, etc...
+
+	ex:
+		python taxosize human
+
+		will return the size of the human taxonomy from NCBI assembly
+
+		>Total files size: 18G
+
+Limitations:
+
+	taxosize is dependant on esearch which is unable to handle queries with resultsets with more than 50,000 items. This is the case for bacteria taxonomy which should not be used with this tool as the search criteria too wide and not a use case that is curently handled.
