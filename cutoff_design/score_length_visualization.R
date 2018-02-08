@@ -11,6 +11,7 @@ ggplot(subset(df,df$alignment != "SRR5629778.ecoli.st131_magicblast.sam"),aes(le
   theme_minimal()
 
 
+# in future versions, use summary(gm) for magicblast cutoff parameter instead of raw alignment score
 gm <- glm(score ~ length, data=subset(df,as.character(df$alignment) == "SRR2848544_magicblast_default.sam"))
 summary(gm)
 2.584e+01
